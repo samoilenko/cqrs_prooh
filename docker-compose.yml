@@ -1,0 +1,36 @@
+version: '3.6'
+services:
+  edupay-web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.nginx.dev.conf
+    ports:
+      - ${PORT:-80}:80
+
+  backend-prooph:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.php-fpm.conf
+    volumes:
+      - ./:/project
+#    ports:
+#      - "9000:9000"
+#    environment:
+#      XDEBUG_CONFIG: remote_host=192.168.5.100 remote_port=9002
+  mysqlserver-prooph:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.mysql.conf
+    environment:
+      - MYSQL_ROOT_PASSWORD=1
+      - MYSQL_DATABASE=ebdb
+      - MYSQL_USER=edupay
+      - MYSQL_PASSWORD=1
+    ports:
+     - "3306:3306"
+    volumes:
+      - mysqledupayvolume-prooph:/var/lib/mysql
+
+volumes:
+  mysqledupayvolume-prooph:
+    external: false

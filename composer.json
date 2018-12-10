@@ -1,0 +1,16 @@
+{
+    "autoload": {
+        "psr-4": {"App\\Basket\\": "Basket/src/"}
+    },
+    "autoload-dev": {
+        "psr-4": {"App\\BasketTest\\": "Basket/tests/"}
+    },
+    "require": {
+        "prooph/common": "^4.1",
+        "prooph/event-sourcing": "^5.2",
+        "prooph/service-bus": "^6.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0"
+    }
+}
